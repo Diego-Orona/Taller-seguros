@@ -148,7 +148,7 @@
             <div class="input-group">
                 <label for="tipo">Tipo de seguro:</label>
                 <select id="tipo" required>
-                    <option value="vida">Seguro de Vida</option>
+                    <option value="vida">Seguro de Vida Temporal</option>
                     <option value="dotal">Seguro Dotal</option>
                     <option value="mixto">Seguro Mixto</option>
                 </select>
@@ -228,9 +228,9 @@
 
             // 3. Función para obtener probabilidad de muerte (sin cambios)
             const getProbabilidadMuerte = (edadActual) => {
-                const probBase = tablaMortalidad[edadActual] || 0.001 * Math.sqrt(edadActual);
-                const variabilidad = 0.9 + Math.random() * 0.2;
-                return Math.min(probBase * variabilidad, 0.99);
+                const probBase = tablaMortalidad[edadActual] || 0.095 * Math.sqrt(edadActual);
+                const variabilidad = 0.95 + Math.random() * 0.1;
+                return Math.min(probBase * variabilidad, 0.999);
             };
 
             // 4. Simulación Monte Carlo (sin cambios)
@@ -240,7 +240,7 @@
                 let fondos = 0;
                 let murio = false;
 
-                for (let año = 1; año <= plazo; año++) {
+                for (let año = 0; año <= plazo; año++) {
                     fondos += prima;
                     fondos *= (1 + tasaInteres);
 
